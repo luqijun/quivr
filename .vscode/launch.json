@@ -36,6 +36,72 @@
                 "PYTHONPATH": "${workspaceFolder}/backend:${env:PYTHONPATH}"
             },
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "name": "Python: Debug Backend(uvicorn)",
+            "consoleName": "Debug Backend(uvicorn)",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "uvicorn",
+            "cwd": "${workspaceFolder}/backend",
+            "env": {
+                "PYTHONPATH": "/usr/local/anaconda3/envs/quvir/bin/python",
+                // "db_username": "postgres",
+                // "db_password": "secret",
+                // "host_server": "localhost",
+                // "database_name": "fastapi",
+                // "ssl_mode": "prefer",
+                // "db_server_port": "5432"
+            },
+            "envFile": "${workspaceFolder}/.env.local",
+            "args": [
+                "quivr_api.main:app",
+                "--reload",
+                "--host",
+                "0.0.0.0",
+                "--port",
+                "5050"
+            ]
+        },
+        {
+            "name": "Python: Debug celery worker",
+            "consoleName": "Debug celery worker",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "celery",
+            "cwd": "${workspaceFolder}/backend",
+            "env": {
+                "PYTHONPATH": "/usr/local/anaconda3/envs/quvir/bin/python",
+                // "PYTHONPATH": "${workspaceFolder}/backend",
+                // "PATH": "${env:PATH};/home/Jun/Projects/Python/NLP/quivr",
+                // "db_username": "postgres",
+                // "db_password": "secret",
+                // "host_server": "localhost",
+                // "database_name": "fastapi",
+                // "ssl_mode": "prefer",
+                // "db_server_port": "5432"
+            },
+            "envFile": "${workspaceFolder}/.env.local",
+            "args": [
+                "-A",
+                "quivr_api.celery_worker",
+                "worker",
+                "-l",
+                "info"
+            ]
+        },
+        {
+            "name": "Python: Debug monitor",
+            "consoleName": "Debug monitor",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/backend/api/quivr_api/celery_monitor.py",
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "/usr/local/anaconda3/envs/quvir/bin/python",
+            },
+            "envFile": "${workspaceFolder}/.env.local",
+            "justMyCode": false
         }
     ]
 }
